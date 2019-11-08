@@ -4,12 +4,15 @@ author: Brian Egan <brian@brianegan.com>
 homepage: https://github.com/brianegan/font_awesome_flutter
 version: 7.0.0
 
+environment:
+  sdk: ">=2.0.0-dev.28.0 <3.0.0"
+
 dependencies:
   flutter:
     sdk: flutter
 
 dev_dependencies:
-  recase: "^1.0.0+1"
+  recase: "^2.0.0+1"
 
 flutter:
   fonts:

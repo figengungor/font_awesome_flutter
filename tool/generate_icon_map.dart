@@ -16,34 +16,27 @@ void main(List<String> arguments) {
   for (String iconName in icons.keys) {
     var icon = icons[iconName];
     var unicode = icon['unicode'];
-    List<String> styles = icon['styles'];
+    List<String> styles = (icon['styles'] as List).cast<String>();
 
-    if (styles.length > 1) {
-      if (styles.contains('regular')) {
-        styles.remove('regular');
-        iconDefinitions[iconName] = generateIconDefinition(
-          iconName,
-          'regular',
-          unicode,
-        );
-      }
 
-      for (String _ in styles) {
+    //solid, regular, brands
+
+    for (String style in styles) {
+
+      String stylePrefix = getStylePrefix(style);
+
+      if(stylePrefix!=null) {
+        String key = '$stylePrefix fa-$iconName';
         iconDefinitions.putIfAbsent(
           iconName,
-          () => generateIconDefinition(
-                iconName,
+              () =>
+              generateIconDefinition(
+                key,
                 styles.first,
                 unicode,
               ),
         );
       }
-    } else {
-      iconDefinitions[iconName] = generateIconDefinition(
-        iconName,
-        styles.first,
-        unicode,
-      );
     }
   }
 
@@ -95,4 +88,13 @@ String generateIconDefinition(String iconName, String style, String unicode) {
   String iconDataSource = 'IconData$style';
 
   return "'$iconName': $iconDataSource(0x$unicode),";
+}
+
+String getStylePrefix(String style){
+  switch(style) {
+    case 'solid': return 'fas';
+    case 'regular': return 'far';
+    case 'brands': return 'fab';
+    default: return null;
+  }
 }
