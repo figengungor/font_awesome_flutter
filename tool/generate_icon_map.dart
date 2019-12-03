@@ -28,7 +28,7 @@ void main(List<String> arguments) {
       if(stylePrefix!=null) {
         String key = '$stylePrefix fa-$iconName';
         iconDefinitions.putIfAbsent(
-          iconName,
+          key,
               () =>
               generateIconDefinition(
                 key,
