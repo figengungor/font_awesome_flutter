@@ -32,7 +32,7 @@ void main(List<String> arguments) {
               () =>
               generateIconDefinition(
                 key,
-                styles.first,
+                style,
                 unicode,
               ),
         );
